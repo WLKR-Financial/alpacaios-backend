@@ -5,6 +5,7 @@ services:
     volumes:
       - ./ribbit.com.pem:/root/certs/ribbit.com.pem
       - ./ribbit-public.com.pem:/root/certs/ribbit-public.com.pem
+      - ./Caddyfile:/etc/caddy/Caddyfile
     ports:
       - "443:443"
     depends_on:
