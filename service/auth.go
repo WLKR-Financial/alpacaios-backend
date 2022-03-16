@@ -120,10 +120,10 @@ func (a *Auth) signup(c *gin.Context) {
 	}
 	decoded, err := base64.StdEncoding.DecodeString(e.Password)
 	if err != nil {
-		apperr.Response(c, apperr.New(http.StatusUnauthorized, "Invalid password decod format."))
+		apperr.Response(c, apperr.New(http.StatusUnauthorized, "Invalid password decode format."))
 		return
 	}
-	password, err := rsa.DecryptPKCS1v15(rand.Reader, "WLK_SECRET",e.password)
+	password, err := rsa.DecryptPKCS1v15(rand.Reader, priv_parsed, decoded)
 	if err != nil {
 		apperr.Response(c, apperr.New(http.StatusUnauthorized, "Invalid password decrypt format."))
 		return
