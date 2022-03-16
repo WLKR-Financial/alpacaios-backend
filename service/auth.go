@@ -123,7 +123,7 @@ func (a *Auth) signup(c *gin.Context) {
 		apperr.Response(c, apperr.New(http.StatusUnauthorized, "Invalid password decod format."))
 		return
 	}
-	password, err := rsa.DecryptPKCS1v15(rand.Reader, priv_parsed, decoded)
+	password, err := rsa.DecryptPKCS1v15(rand.Reader, "WLK_SECRET",e.password)
 	if err != nil {
 		apperr.Response(c, apperr.New(http.StatusUnauthorized, "Invalid password decrypt format."))
 		return
