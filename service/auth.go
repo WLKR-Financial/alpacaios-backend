@@ -110,12 +110,12 @@ func (a *Auth) signup(c *gin.Context) {
 
 	fileByte, err := ioutil.ReadFile("private_key.pem")
 	if err != nil {
-		apperr.Response(c, apperr.New(http.StatusUnauthorized, "Invalid password format."))
+		apperr.Response(c, apperr.New(http.StatusUnauthorized, "Invalid password private key"))
 		return
 	}
 	priv_parsed, err := ParseRsaPrivateKeyFromPemStr(string(fileByte))
 	if err != nil {
-		apperr.Response(c, apperr.New(http.StatusUnauthorized, "Invalid password format."))
+		apperr.Response(c, apperr.New(http.StatusUnauthorized, "Password error"))
 		return
 	}
 	decoded, err := base64.StdEncoding.DecodeString(e.Password)
