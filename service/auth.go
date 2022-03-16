@@ -129,7 +129,7 @@ func (a *Auth) signup(c *gin.Context) {
 	// 	return
 	// }
 
-	user, err := a.svc.Signup(c, e, string(decode))
+	user, err := a.svc.Signup(c, e, string(decoded))
 	if err != nil {
 		apperr.Response(c, err)
 		return
