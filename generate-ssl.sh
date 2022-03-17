@@ -1,4 +1,4 @@
-mkcert -key-file ribbit.com.pem -cert-file ribbit-public.com.pem ribbit.com
+mkcert -key-file alpacaios.herokuapp.com.pem -cert-file alpacaios.herokuapp.com-key.pem alpacaios.heroku.com
 
 # for client request encryption
 openssl genrsa -out private_key.pem 1024
