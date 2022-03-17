@@ -18,10 +18,12 @@ import (
 type PostgresConfig struct {
 	URL      string `env:"DATABASE_URL"` // DATABASE_URL will be used in preference if it exists
 	Host     string `env:"POSTGRES_HOST" envDefault:"localhost"`
-	Port     string `env:"POSTGRES_PORT" envDefault:"5432"`
+	// Ssl     string `env:"POSTGRES_PORT" envDefault:"5432"`
 	User     string `env:"POSTGRES_USER"`
 	Password string `env:"POSTGRES_PASSWORD"`
 	Database string `env:"POSTGRES_DB"`
+	Ssl string      `env:"POSTGRES_SSL"`
+	
 }
 
 // PostgresSuperUser persists the config for our PostgreSQL superuser
@@ -31,6 +33,8 @@ type PostgresSuperUser struct {
 	User     string `env:"POSTGRES_SUPERUSER" envDefault:"postgres"`
 	Password string `env:"POSTGRES_SUPERUSER_PASSWORD" envDefault:""`
 	Database string `env:"POSTGRES_SUPERUSER_DB" envDefault:"postgres"`
+	Ssl string      `env:"POSTGRES_SSL"`
+
 }
 
 // GetConnection returns our pg database connection
@@ -45,11 +49,12 @@ func GetConnection() *pg.DB {
 		c = validConfig
 	}
 	db := pg.Connect(&pg.Options{
-		Addr:     c.Host + ":" + c.Port,
+		Addr:     c.Host,
 		User:     c.User,
 		Password: c.Password,
 		Database: c.Database,
 		PoolSize: 150,
+		
 	})
 	return db
 }
@@ -104,7 +109,6 @@ func validPostgresURL(URL string) (*PostgresConfig, error) {
 	c.URL = URL
 	c.Host = validURL.Host
 	c.Database = validURL.Path
-	c.Port = validURL.Port()
 	c.User = validURL.User.Username()
 	c.Password, _ = validURL.User.Password()
 	return c, nil

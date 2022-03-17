@@ -1,0 +1,11 @@
+CREATE TABLE IF NOT EXISTS bankAccount(
+ID SERIAL PRIMARY KEY,
+userID      INTEGER,
+accessToken VARCHAR(100),
+accountID   VARCHAR(100),
+bankName    VARCHAR(100),
+accountName VARCHAR(100),
+status      BOOLEAN,
+
+created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

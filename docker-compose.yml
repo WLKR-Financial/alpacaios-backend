@@ -20,7 +20,7 @@ services:
   database:
     image: "postgres:14.0"
     ports:
-      - "5432:5432"
+      - "8080:8080"
     # volumes:
     # add local volume mount if needed
       # - ./data:/var/lib/postgresql/data/pgdata
